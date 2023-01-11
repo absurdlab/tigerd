@@ -8,10 +8,6 @@ on:
       - feat/*
       - fix/*
 
-permissions:
-  contents: write
-  packages: write
-
 env:
   GO_VERSION: "1.18.1"
 
@@ -88,7 +84,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ secrets.GHCR_USERNAME }}
-          password: ${{ github.token }}
+          password: ${{ secrets.GHCR_PASSWORD }}
       - name: build
         uses: docker/build-push-action@v3
         with:
