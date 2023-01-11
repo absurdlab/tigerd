@@ -1,13 +1,18 @@
 package server
 
 import (
+	"absurdlab.io/tigerd/internal/buildinfo"
 	"github.com/labstack/echo/v4"
 	"github.com/rs/zerolog"
 	"golang.org/x/net/http2"
 )
 
 func start(cfg *Config, e *echo.Echo, logger *zerolog.Logger) error {
-	logger.Info().Int("port", cfg.Port).Msg("Listening for requests.")
+	logger.Info().
+		Int("port", cfg.Port).
+		Str("version", buildinfo.Version).
+		Msg("Listening for requests.")
+
 	return e.StartH2CServer(cfg.address(), &http2.Server{})
 }
 

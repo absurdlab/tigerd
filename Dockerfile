@@ -1,10 +1,13 @@
 FROM golang:1.18.1 AS buildStage
 
+ARG BUILD_VERSION
+ARG BUILD_TIME
+
 ENV HOME /build
 ENV CGO_ENABLED 0
 ENV GOOS linux
-
-ARG BUILD_VERSION
+ENV BUILD_VERSION=$BUILD_VERSION
+ENV BUILD_TIME=$BUILD_TIME
 
 WORKDIR /build
 
@@ -14,7 +17,7 @@ RUN go mod download -x
 COPY . .
 RUN go build \
     -a \
-    -ldflags "-X github.com/absurdlab/tigerd/buildinfo.Version=$BUILD_VERSION" \
+    -ldflags "-w -s -X absurdlab.io/tigerd/internal/buildinfo.Version=$BUILD_VERSION -X absurdlab.io/tigerd/internal/buildinfo.CompiledAt=$BUILD_TIME" \
     -installsuffix cgo \
     -o tigerd \
     .

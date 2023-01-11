@@ -2,17 +2,17 @@ package main
 
 import (
 	"absurdlab.io/tigerd/cmd/server"
+	"absurdlab.io/tigerd/internal/buildinfo"
 	"github.com/rs/zerolog/log"
 	"github.com/urfave/cli/v2"
 	"os"
-	"time"
 )
 
 func main() {
-	tigerd := cli.App{
+	tigerd := &cli.App{
 		Name:     "tigerd",
-		Version:  "",
-		Compiled: time.Time{},
+		Version:  buildinfo.Version,
+		Compiled: buildinfo.CompileAtTime(),
 		Commands: cli.Commands{
 			server.Command(),
 		},
