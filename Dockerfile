@@ -24,10 +24,6 @@ RUN go build \
 
 FROM alpine:3.15
 
-LABEL org.opencontainers.image.title="tigerd"
-LABEL org.opencontainers.image.source="https://github.com/absurdlab/tigerd"
-LABEL org.opencontainers.image.authors="Weinan Qiu"
-
 COPY --from=buildStage /build/tigerd /usr/bin/tigerd
 
 ENTRYPOINT ["/usr/bin/tigerd"]
