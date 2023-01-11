@@ -100,3 +100,23 @@ jobs:
             org.opencontainers.image.title="tigerd"
             org.opencontainers.image.source="https://github.com/absurdlab/tigerd"
             org.opencontainers.image.authors="Weinan Qiu"
+
+  deploy:
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - build
+      - prepare
+    steps:
+      - name: notify staging deploy pipeline
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        with:
+          owner: absurdlab
+          repo: deploy
+          github_token: ${{ secrets.PAT_TOKEN }}
+          workflow_file_name: tigerd.yaml
+          ref: main
+          propagate_failure: false
+          wait_workflow: false
+          client_payload: |
+            {"environment": "staging", "version": "${{ needs.prepare.outputs.BUILD_VERSION }}"}
