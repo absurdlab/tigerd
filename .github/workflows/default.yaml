@@ -147,8 +147,10 @@ jobs:
         run: |
           if [[ $(echo $NEEDS | jq '.[].result | all(. == "success")') == 'true' ]]; then
             echo "SLACK_COLOR=good" >> $GITHUB_OUTPUT
+            echo "SLACK_TITLE=Success" >> $GITHUB_OUTPUT
           else
             echo "SLACK_COLOR=danger" >> $GITHUB_OUTPUT
+            echo "SLACK_TITLE=Failed" >> $GITHUB_OUTPUT
           fi
         env:
           NEEDS: ${{ toJSON(needs) }}
@@ -156,5 +158,6 @@ jobs:
         uses: rtcamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ steps.workflow_result.output.SLACK_COLOR }}
+          SLACK_COLOR: ${{ steps.workflow_result.outputs.SLACK_COLOR }}
+          SLACK_TITLE: ${{ steps.workflow_result.outputs.SLACK_TITLE }}
           SLACK_CHANNEL: cicd
