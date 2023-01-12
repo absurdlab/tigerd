@@ -161,3 +161,4 @@ jobs:
           SLACK_COLOR: ${{ steps.workflow_result.outputs.SLACK_COLOR }}
           SLACK_TITLE: ${{ steps.workflow_result.outputs.SLACK_TITLE }}
           SLACK_CHANNEL: cicd
+          SLACK_USERNAME: Tigerd
