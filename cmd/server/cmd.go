@@ -99,7 +99,6 @@ func (c *Config) flagExternalURL() *cli.StringFlag {
 	return &cli.StringFlag{
 		Name:        "external_url",
 		Usage:       "Externally accessible URL for the server deployment.",
-		Required:    true,
 		Destination: &c.ExternalURL,
 		EnvVars:     []string{"TIGERD_EXTERNAL_URL"},
 	}
