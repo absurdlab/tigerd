@@ -8,6 +8,7 @@ require (
 	github.com/bufbuild/connect-go v1.4.1
 	github.com/go-jose/go-jose/v3 v3.0.0
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
+	github.com/hellofresh/health-go/v5 v5.0.0
 	github.com/labstack/echo/v4 v4.10.0
 	github.com/rs/zerolog v1.28.0
 	github.com/samber/lo v1.37.0
@@ -29,6 +30,8 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
+	go.opentelemetry.io/otel v1.10.0 // indirect
+	go.opentelemetry.io/otel/trace v1.10.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/dig v1.16.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect

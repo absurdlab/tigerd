@@ -1,8 +1,10 @@
 package server
 
 import (
+	"absurdlab.io/tigerd/internal/buildinfo"
 	"absurdlab.io/tigerd/oidc"
 	"encoding/json"
+	"github.com/hellofresh/health-go/v5"
 	"github.com/labstack/echo/v4"
 	"github.com/rs/zerolog"
 	"github.com/ziflex/lecho/v3"
@@ -51,4 +53,14 @@ func newBaseLogger(cfg *Config) (*zerolog.Logger, error) {
 	logger = logger.With().Timestamp().Logger()
 
 	return &logger, nil
+}
+
+func newHealth() (*health.Health, error) {
+	return health.New(
+		health.WithComponent(health.Component{
+			Name:    "tigerd",
+			Version: buildinfo.Version,
+		}),
+		health.WithSystemInfo(),
+	)
 }

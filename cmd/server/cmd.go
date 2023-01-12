@@ -42,6 +42,7 @@ func Command() *cli.Command {
 				fx.Provide(
 					newEcho,
 					newBaseLogger,
+					newHealth,
 					newOpenIDConnectProvider,
 					newWellKnownHandler,
 				),
