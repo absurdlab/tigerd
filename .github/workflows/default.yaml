@@ -145,7 +145,7 @@ jobs:
       - name: decide outcome
         id: workflow_result
         run: |
-          if [[ $(echo $NEEDS | jq '.[].result | all(. == "success")') == 'true' ]]; then
+          if [[ $(echo $NEEDS | jq '[.[].result] | all(. == "success")') == 'true' ]]; then
             echo "SLACK_COLOR=good" >> $GITHUB_OUTPUT
             echo "SLACK_TITLE=Success" >> $GITHUB_OUTPUT
           else
