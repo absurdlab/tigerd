@@ -31,6 +31,9 @@ jobs:
           echo "BUILD_REVISION=${GITHUB_SHA}" >> $GITHUB_OUTPUT
       - name: setup helm
         uses: azure/setup-helm@v3
+        with:
+          version: latest
+          token: ${{ secrets.PAT_TOKEN }}
       - name: get latest chart version
         id: chartinfo
         run: |
@@ -87,7 +90,7 @@ jobs:
       - name: setup buildx
         uses: docker/setup-buildx-action@v2
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
       - name: login to ghcr
         uses: docker/login-action@v2
         with:
@@ -98,7 +101,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           build-args: |
             BUILD_TIME=${{ needs.prepare.outputs.BUILD_TIME }}
             BUILD_VERSION=${{ needs.prepare.outputs.BUILD_VERSION }}
