@@ -18,6 +18,7 @@ jobs:
       BUILD_TIME: ${{ steps.buildinfo.outputs.BUILD_TIME }}
       BUILD_VERSION: ${{ steps.buildinfo.outputs.BUILD_VERSION }}
       BUILD_REVISION: ${{ steps.buildinfo.outputs.BUILD_REVISION }}
+      CHART_VERSION: ${{ steps.chartinfo.outputs.CHART_VERSION }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -28,11 +29,19 @@ jobs:
           echo "BUILD_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
           echo "BUILD_VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "BUILD_REVISION=${GITHUB_SHA}" >> $GITHUB_OUTPUT
+      - name: setup helm
+        uses: azure/setup-helm@v3
+      - name: get latest chart version
+        id: chartinfo
+        run: |
+          helm repo add absurdlab https://absurdlab.github.io/charts
+          echo "CHART_VERSION=$(helm search repo absurdlab/tigerd --versions -o json | jq '.[0].version' -r)" >> $GITHUB_OUTPUT
       - name: debug
         run: |
           echo build_time=${{ steps.buildinfo.outputs.BUILD_TIME }}
           echo build_version=${{ steps.buildinfo.outputs.BUILD_VERSION }}
           echo build_revision=${{ steps.buildinfo.outputs.BUILD_REVISION }}
+          echo chart_version=${{ steps.chartinfo.outputs.CHART_VERSION }}
 
   test:
     runs-on: ubuntu-22.04
@@ -119,4 +128,4 @@ jobs:
           propagate_failure: false
           wait_workflow: false
           client_payload: |
-            {"environment": "staging", "version": "${{ needs.prepare.outputs.BUILD_VERSION }}"}
+            {"environment": "staging", "version": "${{ needs.prepare.outputs.BUILD_VERSION }}", "chart_version": "${{ needs.prepare.outputs.CHART_VERSION }}"}
