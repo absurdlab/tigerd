@@ -132,3 +132,18 @@ jobs:
           wait_workflow: false
           client_payload: |
             {"environment": "staging", "version": "${{ needs.prepare.outputs.BUILD_VERSION }}", "chart_version": "${{ needs.prepare.outputs.CHART_VERSION }}"}
+
+  notify:
+    if: ${{ always() }}
+    runs-on: ubuntu-22.04
+    needs:
+      - prepare
+      - test
+      - build
+      - deploy
+    steps:
+      - name: debug
+        run: |
+          echo $NEEDS
+        env:
+          NEEDS: ${{ toJSON(needs) }}
