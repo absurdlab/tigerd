@@ -91,7 +91,7 @@ func (c *Config) flagPort() *cli.IntFlag {
 		Usage:       "Port where server listens for requests.",
 		Value:       4904,
 		Destination: &c.Port,
-		EnvVars:     []string{"TIGERD_PORT"},
+		EnvVars:     []string{"TIGERD_SERVER_PORT"},
 	}
 }
 
