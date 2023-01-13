@@ -20,8 +20,10 @@ func start(cfg *Config, e *echo.Echo, logger *zerolog.Logger) error {
 func mountEndpoints(
 	e *echo.Echo,
 	wellKnownHandler *wellKnownHandler,
+	jwksHandler *jwksHandler,
 	health *health.Health,
 ) {
 	e.GET("/.well-known/openid-configuration", wellKnownHandler.GetConfiguration)
+	e.GET("/jwks.json", jwksHandler.GetJSONWebKeySet)
 	e.GET("/health", echo.WrapHandler(health.Handler()))
 }

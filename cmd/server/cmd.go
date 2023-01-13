@@ -23,6 +23,7 @@ func Command() *cli.Command {
 			altsrc.NewStringFlag(cfg.flagExternalURL()),
 			altsrc.NewStringFlag(cfg.flagLogLevel()),
 			altsrc.NewBoolFlag(cfg.flagLogJSON()),
+			altsrc.NewStringFlag(cfg.flagServerJwks()),
 		}
 	)
 
@@ -43,8 +44,10 @@ func Command() *cli.Command {
 					newEcho,
 					newBaseLogger,
 					newHealth,
+					newServerJwks,
 					newOpenIDConnectProvider,
 					newWellKnownHandler,
+					newJwksHandler,
 				),
 				fx.Invoke(
 					mountEndpoints,
@@ -60,6 +63,7 @@ type Config struct {
 	ExternalURL string `yaml:"external_url"`
 	LogLevel    string `yaml:"log_level"`
 	LogJSON     bool   `yaml:"log_json"`
+	ServerJwks  string `yaml:"server_jwks"`
 }
 
 func (c *Config) address() string {
@@ -80,6 +84,10 @@ func (c *Config) validate() (err error) {
 		),
 		"log_level": validation.Validate(c.LogLevel,
 			validation.In("INFO", "DEBUG", "ERROR", "TRACE", "WARN"),
+		),
+		"server_jwks": validation.Validate(c.ServerJwks,
+			validation.Required,
+			is.JSON,
 		),
 	}.Filter()
 	return
@@ -120,5 +128,14 @@ func (c *Config) flagLogJSON() *cli.BoolFlag {
 		Usage:       "Enable logging with JSON format",
 		Destination: &c.LogJSON,
 		EnvVars:     []string{"TIGERD_LOG_JSON"},
+	}
+}
+
+func (c *Config) flagServerJwks() *cli.StringFlag {
+	return &cli.StringFlag{
+		Name:        "server_jwks",
+		Usage:       "Value of the JSON Web Key Set used by the server",
+		Destination: &c.ServerJwks,
+		EnvVars:     []string{"TIGERD_SERVER_JWKS"},
 	}
 }

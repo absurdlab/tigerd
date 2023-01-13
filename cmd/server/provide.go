@@ -2,6 +2,7 @@ package server
 
 import (
 	"absurdlab.io/tigerd/internal/buildinfo"
+	"absurdlab.io/tigerd/jose"
 	"absurdlab.io/tigerd/oidc"
 	"encoding/json"
 	"github.com/hellofresh/health-go/v5"
@@ -24,14 +25,6 @@ func newEcho(logger *zerolog.Logger) *echo.Echo {
 
 func newOpenIDConnectProvider(cfg *Config) *oidc.Provider {
 	return oidc.NewProvider(cfg.ExternalURL)
-}
-
-func newWellKnownHandler(p *oidc.Provider) (*wellKnownHandler, error) {
-	providerBytes, err := json.Marshal(p)
-	if err != nil {
-		return nil, err
-	}
-	return &wellKnownHandler{providerBytes: providerBytes}, nil
 }
 
 func newBaseLogger(cfg *Config) (*zerolog.Logger, error) {
@@ -63,4 +56,24 @@ func newHealth() (*health.Health, error) {
 		}),
 		health.WithSystemInfo(),
 	)
+}
+
+func newServerJwks(cfg *Config) (*jose.JSONWebKeySet, error) {
+	return jose.ReadJSONWebKeySet(strings.NewReader(cfg.ServerJwks))
+}
+
+func newWellKnownHandler(p *oidc.Provider) (*wellKnownHandler, error) {
+	providerBytes, err := json.Marshal(p)
+	if err != nil {
+		return nil, err
+	}
+	return &wellKnownHandler{providerBytes: providerBytes}, nil
+}
+
+func newJwksHandler(jwks *jose.JSONWebKeySet) (*jwksHandler, error) {
+	jwksBytes, err := jwks.Public().MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return &jwksHandler{jwksBytes: jwksBytes}, nil
 }
