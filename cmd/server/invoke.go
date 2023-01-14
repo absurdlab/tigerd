@@ -46,5 +46,7 @@ func setupMetrics(e *echo.Echo, metrics *internal.Metrics) {
 		},
 		metrics.ToPrometheusMetrics(),
 	)
+
+	// prometheus metrics endpoint /metrics is mounted implicitly on echo.
 	prom.Use(e)
 }
