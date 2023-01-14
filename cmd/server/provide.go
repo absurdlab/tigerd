@@ -1,6 +1,7 @@
 package server
 
 import (
+	"absurdlab.io/tigerd/cmd/server/internal"
 	"absurdlab.io/tigerd/internal/buildinfo"
 	"absurdlab.io/tigerd/jose"
 	"absurdlab.io/tigerd/oidc"
@@ -56,6 +57,10 @@ func newHealth() (*health.Health, error) {
 		}),
 		health.WithSystemInfo(),
 	)
+}
+
+func newMetrics() *internal.Metrics {
+	return &internal.Metrics{}
 }
 
 func newServerJwks(cfg *Config) (*jose.JSONWebKeySet, error) {
