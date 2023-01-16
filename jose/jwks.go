@@ -2,6 +2,7 @@ package jose
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/go-jose/go-jose/v3"
 	"io"
 	"time"
@@ -136,4 +137,17 @@ func (s *JSONWebKeySet) UnmarshalJSON(bytes []byte) error {
 	}
 
 	return nil
+}
+
+func (s *JSONWebKeySet) String() string {
+	if s == nil {
+		return ""
+	}
+
+	bytes, err := s.MarshalJSON()
+	if err != nil {
+		panic(fmt.Sprintf("jwks marshal: %s", err))
+	}
+
+	return string(bytes)
 }

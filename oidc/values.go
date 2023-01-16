@@ -56,6 +56,20 @@ const (
 	PrivateKeyJwt     = "private_key_jwt"
 )
 
+// code_challenge_method.
+const (
+	CodeChallengeMethodPlain = "plain"
+	CodeChallengeMethodS256  = "S256"
+)
+
+// prompt.
+const (
+	PromptNone          = "none"
+	PromptLogin         = "login"
+	PromptSelectAccount = "select_account"
+	PromptConsent       = "consent"
+)
+
 // IsNoneOrEmpty checks if value is empty or equals to "none".
 func IsNoneOrEmpty(value string) bool {
 	switch value {

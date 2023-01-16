@@ -3,8 +3,8 @@ module absurdlab.io/tigerd
 go 1.18
 
 require (
-	buf.build/gen/go/absurdlab/tigerdapis/bufbuild/connect-go v1.4.1-20230108072344-ae46e30f7806.1
-	buf.build/gen/go/absurdlab/tigerdapis/protocolbuffers/go v1.28.1-20230108072344-ae46e30f7806.4
+	buf.build/gen/go/absurdlab/tigerdapis/bufbuild/connect-go v1.4.1-20230116062432-a9f9ff23b316.1
+	buf.build/gen/go/absurdlab/tigerdapis/protocolbuffers/go v1.28.1-20230116062432-a9f9ff23b316.4
 	github.com/bufbuild/connect-go v1.4.1
 	github.com/go-jose/go-jose/v3 v3.0.0
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
@@ -19,6 +19,7 @@ require (
 	github.com/ziflex/lecho/v3 v3.3.0
 	go.uber.org/fx v1.19.0
 	golang.org/x/net v0.4.0
+	google.golang.org/protobuf v1.28.1
 )
 
 require (
@@ -54,6 +55,5 @@ require (
 	golang.org/x/sys v0.4.0 // indirect
 	golang.org/x/text v0.5.0 // indirect
 	golang.org/x/time v0.2.0 // indirect
-	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

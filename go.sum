@@ -1,7 +1,7 @@
-buf.build/gen/go/absurdlab/tigerdapis/bufbuild/connect-go v1.4.1-20230108072344-ae46e30f7806.1 h1:hOGDTnEIdkmPeouvtC95/2nMCsIBuiQi03UgwBUaWas=
-buf.build/gen/go/absurdlab/tigerdapis/bufbuild/connect-go v1.4.1-20230108072344-ae46e30f7806.1/go.mod h1:541/QRIY74K5vPALnqiZxMHwncU0EWPBme6nJ8uoJdo=
-buf.build/gen/go/absurdlab/tigerdapis/protocolbuffers/go v1.28.1-20230108072344-ae46e30f7806.4 h1:Rk06YBCSxn6YfLEp4UZ2lL1lIm2DCDWh7J3NB0EN6Ok=
-buf.build/gen/go/absurdlab/tigerdapis/protocolbuffers/go v1.28.1-20230108072344-ae46e30f7806.4/go.mod h1:U8yzaPhGoJqG2RBUz2w/IbWs46cn3CDUUQSU9qtHMqw=
+buf.build/gen/go/absurdlab/tigerdapis/bufbuild/connect-go v1.4.1-20230116062432-a9f9ff23b316.1 h1:0qKBEGOxb5WhB9UTey8cLmApKxAGRB8dB/VcB9J02Es=
+buf.build/gen/go/absurdlab/tigerdapis/bufbuild/connect-go v1.4.1-20230116062432-a9f9ff23b316.1/go.mod h1:DdHiSRGMZHabrwLZb6+l2/J43sSt9XrDKN14mEpXAXo=
+buf.build/gen/go/absurdlab/tigerdapis/protocolbuffers/go v1.28.1-20230116062432-a9f9ff23b316.4 h1:AEVJ6qPfMaR6GCnPyU7TIdu1h/MAisTGSwBGkhKl/9E=
+buf.build/gen/go/absurdlab/tigerdapis/protocolbuffers/go v1.28.1-20230116062432-a9f9ff23b316.4/go.mod h1:U8yzaPhGoJqG2RBUz2w/IbWs46cn3CDUUQSU9qtHMqw=
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 cloud.google.com/go v0.38.0/go.mod h1:990N+gfupTy94rShfmMCWGDn0LpTmnzTp2qbd1dvSRU=
